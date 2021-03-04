@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.lrh.dao.StuDao">
+<select id="queryDataCount" parameterType="org.lrh.entity.vo.StuData" resultType="java.lang.Integer">
+    select count(*) from tt_stu where 4=4
+    <if test='name != null and name != &quot;&quot;'>
+        and name like concat('%',#{name},'%')
+    </if>
+</select>
+    <select id="queryListDataByParams" parameterType="org.lrh.entity.vo.StuData" resultType="org.lrh.entity.po.Stu">
+        select * from tt_stu where 1=1
+    <if test='name != null and name != &quot;&quot;'>
+        and name like concat('%',#{name},'%')
+    </if>
+        limit ${size*(start-1)},#{size}
+    </select>
+    <insert id="addStu" parameterType="org.lrh.entity.po.Stu">
+        insert into tt_stu (name,sex,birthday,score,hobby) value (#{name},#{sex},#{birthday},#{score},#{hobby})
+    </insert>
+    <delete id="deleteStuById" parameterType="java.lang.Integer">
+        delete from tt_stu where id=#{id}
+    </delete>
+    <select id="huixian"  parameterType="java.lang.Integer"  resultType="org.lrh.entity.po.Stu">
+            select * from tt_stu where id=#{id}
+    </select>
+    <select id="updateStu" parameterType="org.lrh.entity.po.Stu">
+        update tt_stu set name=#{name},sex=#{sex},birthday=#{birthday},score=#{score},hobby=#{hobby} where id=#{id}
+    </select>
+</mapper>
